@@ -1,33 +1,33 @@
 <div *ngIf="!isConnected;else other_content">
-  <div>ルーム名 : <input class="input" (input)="calcPeerId($event.target.value, password)" [(ngModel)]="roomName" required minlength="1" maxlength="128" #roomNameValidation="ngModel"
-      placeholder="ルームの名前は必須" /></div>
-  <div>パスワード: <input class="input" (input)="calcPeerId(roomName, $event.target.value)" [(ngModel)]="password" maxlength="12" #passwordValidation="ngModel" placeholder="空ならパスワードなし"
+  <div>Room Name:<input class="input" (input)="calcPeerId($event.target.value, password)" [(ngModel)]="roomName" required minlength="1" maxlength="128" #roomNameValidation="ngModel"
+      placeholder="(Mandatory)" /></div>
+  <div>Password<input class="input" (input)="calcPeerId(roomName, $event.target.value)" [(ngModel)]="password" maxlength="12" #passwordValidation="ngModel" placeholder="(Optional)"
     /></div>
   <hr/>
   <div *ngIf="roomNameValidation.errors && (roomNameValidation.dirty || roomNameValidation.touched)">
     <div [hidden]="!roomNameValidation.errors.required">
-      ルームの名前は必須です。
+      Please set a valid room name.
     </div>
     <div [hidden]="!roomNameValidation.errors.minlength">
-      ルームの名前は必須です。
+      Please set a valid room name.
     </div>
     <div [hidden]="!roomNameValidation.errors.maxlength">
-      ルーム名前の長さは128以内にしてください。
+      Please set a valid room name. (Max length 128)
     </div>
   </div>
   <div *ngIf="passwordValidation.errors && (passwordValidation.dirty || passwordValidation.touched)">
     <div [hidden]="!passwordValidation.errors.maxlength">
-      パスワードの長さは12以内にしてください。
+      Please set a valid password. (Max length 12)
     </div>
   </div>
   <div *ngIf="!validateLength">
-    ルームの名前とパスワードの合計が長すぎるようです。どちらかを少し短くしてみてください。
+    The room name and password are too long (combined length). Please shorten one or both.
   </div>
   <div>
-    <button [disabled]="!roomNameValidation.valid || !passwordValidation.valid || !validateLength" (click)="createRoom()">新しいルームを作成</button>
+    <button [disabled]="!roomNameValidation.valid || !passwordValidation.valid || !validateLength" (click)="createRoom()">Create a New Room</button>
   </div>
 </div>
-<div><span style="font-size: 12px;">※作成したルームは参加者が0人になった時点で解散します。ルームの状態を次回に持ち越したい場合は必ず「保存」してください。</span></div>
+<div><span style="font-size: 12px;">The room will automatically be deleted if it has no participants. If you wish to save your data, please do so before leaving.</span></div>
 <ng-template #other_content>
-  <span style="font-size: 12px;">他の参加者と接続したままではルーム作成を行えません。<br>別のルームに接続したい場合は、他の参加者との接続を切ってください。<br>（※ページリロードで切断できます。）</span>
+  <span style="font-size: 12px;">Cannot create a new room while connected to other clients.<br>If you wish to create a new room, disconnect from any other clients first.<br>(This can be done by refreshing the page.)</span>
 </ng-template>

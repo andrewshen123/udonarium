@@ -242,14 +242,14 @@ export class RooperCardComponent implements OnInit, OnDestroy, AfterViewInit {
       [
         !this.isVisible || this.isHand
           ? {
-            name: "表にする",
+            name: "Faceup",
             action: () => {
               this.card.faceUp();
               SoundEffect.play(PresetSound.cardDraw);
             }
           }
           : {
-            name: "裏にする",
+            name: "Facedown",
             action: () => {
               this.card.faceDown();
               SoundEffect.play(PresetSound.cardDraw);
@@ -257,21 +257,21 @@ export class RooperCardComponent implements OnInit, OnDestroy, AfterViewInit {
           },
         ContextMenuSeparator,
         {
-          name: "カードを編集",
+          name: "Edit Card",
           action: () => {
             this.showDetail(this.card);
           }
         },
         ContextMenuSeparator,
         {
-          name: "削除する",
+          name: "Delete",
           action: () => {
             this.card.destroy();
             SoundEffect.play(PresetSound.sweep);
           }
         }
       ],
-      this.isVisible ? this.name : "カード"
+      this.isVisible ? this.name : "Card"
     );
   }
 
@@ -308,28 +308,28 @@ export class RooperCardComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
     // 友好カウンター
-    if (e.key === "Y") {
+    if (e.key === "G") {
       this.card.decreaseGoodwillCounter();
       return;
     }
-    if (e.key === "y") {
+    if (e.key === "g") {
       this.card.increaseGoodwillCounter();
       return;
     }
     // 不安カウンター
-    if (e.key === "H") {
+    if (e.key === "P") {
       this.card.decreaseParanoiaCounter();
       return;
     }
-    if (e.key === "h") {
+    if (e.key === "p") {
       this.card.increaseParanoiaCounter();
       return;
     }
-    if (e.key === "A") {
+    if (e.key === "I") {
       this.card.decreaseIntrigueCounter();
       return;
     }
-    if (e.key === "a") {
+    if (e.key === "i") {
       this.card.increaseIntrigueCounter();
       return;
     }
@@ -393,7 +393,7 @@ export class RooperCardComponent implements OnInit, OnDestroy, AfterViewInit {
       className: gameObject.aliasName
     });
     let coordinate = this.pointerDeviceService.pointers[0];
-    let title = "カード設定";
+    let title = "Card Settings";
     if (gameObject.name.length) title += " - " + gameObject.name;
     let option: PanelOption = {
       title: title,

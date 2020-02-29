@@ -117,12 +117,12 @@ export class TerrainComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contextMenuService.open(menuPosition, [
       (this.isLocked
         ? {
-          name: '固定解除', action: () => {
+          name: 'Unlock', action: () => {
             this.isLocked = false;
             SoundEffect.play(PresetSound.unlock);
           }
         } : {
-          name: '固定する', action: () => {
+          name: 'Lock', action: () => {
             this.isLocked = true;
             SoundEffect.play(PresetSound.lock);
           }
@@ -130,7 +130,7 @@ export class TerrainComponent implements OnInit, OnDestroy, AfterViewInit {
       ContextMenuSeparator,
       (this.hasWall
         ? {
-          name: '壁を非表示', action: () => {
+          name: 'Hide Wall', action: () => {
             this.mode = TerrainViewState.FLOOR;
             if (this.depth * this.width === 0) {
               this.terrain.width = this.width <= 0 ? 1 : this.width;
@@ -138,14 +138,14 @@ export class TerrainComponent implements OnInit, OnDestroy, AfterViewInit {
             }
           }
         } : {
-          name: '壁を表示', action: () => {
+          name: 'Show Wall', action: () => {
             this.mode = TerrainViewState.ALL;
           }
         }),
       ContextMenuSeparator,
-      { name: '地形設定を編集', action: () => { this.showDetail(this.terrain); } },
+      { name: 'Edit Terrain', action: () => { this.showDetail(this.terrain); } },
       {
-        name: 'コピーを作る', action: () => {
+        name: 'Clone', action: () => {
           let cloneObject = this.terrain.clone();
           cloneObject.location.x += this.gridSize;
           cloneObject.location.y += this.gridSize;
@@ -155,13 +155,13 @@ export class TerrainComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       },
       {
-        name: '削除する', action: () => {
+        name: 'Delete', action: () => {
           this.terrain.destroy();
           SoundEffect.play(PresetSound.sweep);
         }
       },
       ContextMenuSeparator,
-      { name: 'オブジェクト作成', action: null, subActions: this.tabletopService.getContextMenuActionsForCreateObject(objectPosition) }
+      { name: 'Create Object', action: null, subActions: this.tabletopService.getContextMenuActionsForCreateObject(objectPosition) }
     ], this.name);
   }
 
@@ -180,7 +180,7 @@ export class TerrainComponent implements OnInit, OnDestroy, AfterViewInit {
   private showDetail(gameObject: Terrain) {
     EventSystem.trigger('SELECT_TABLETOP_OBJECT', { identifier: gameObject.identifier, className: gameObject.aliasName });
     let coordinate = this.pointerDeviceService.pointers[0];
-    let title = '地形設定';
+    let title = 'Edit Terrain';
     if (gameObject.name.length) title += ' - ' + gameObject.name;
     let option: PanelOption = { title: title, left: coordinate.x - 250, top: coordinate.y - 150, width: 500, height: 300 };
     let component = this.panelService.open<GameCharacterSheetComponent>(GameCharacterSheetComponent, option);

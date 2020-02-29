@@ -35,7 +35,7 @@ export class PeerMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.panelService.title = '接続情報';
+    this.panelService.title = 'Connection Info';
   }
 
   ngAfterViewInit() {
@@ -86,12 +86,12 @@ export class PeerMenuComponent implements OnInit, OnDestroy, AfterViewInit {
           EventSystem.unregister(dummy);
           EventSystem.register(dummy)
             .on('CONNECT_PEER', event => {
-              console.log('接続成功！', event.data.peer);
+              console.log('Connection Successful！', event.data.peer);
               this.resetPeerIfNeeded();
               EventSystem.unregister(dummy);
             })
             .on('DISCONNECT_PEER', event => {
-              console.warn('接続失敗', event.data.peer);
+              console.warn('Connection Failed', event.data.peer);
               this.resetPeerIfNeeded();
               EventSystem.unregister(dummy);
             });
@@ -128,7 +128,7 @@ export class PeerMenuComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
       if (conectPeers.length < 1) {
-        this.help = '前回接続していたルームが見つかりませんでした。既に解散しているかもしれません。';
+        this.help = 'Your previous room could not be found. It may have been closed.';
         console.warn('Room is already closed...');
         return;
       }

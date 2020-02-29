@@ -26,7 +26,7 @@ export class RooperGameSheetComponent implements OnInit, OnDestroy {
   }
 
   private changeTitle() {
-    this.modalService.title = this.panelService.title = '惨劇RoopeR管理';
+    this.modalService.title = this.panelService.title = 'Tragedy Looper';
   }
 
   ngOnDestroy() {

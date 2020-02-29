@@ -1,18 +1,18 @@
 
 <div>
   <div class="title">
-      <h2>キャラクター</h2>
+      <h2>Character</h2>
       <button (click)="addRooperCard()">
           <i class="material-icons">person_add</i>
       </button>
   </div>
   <table style="font-size:12px; border: 0; border-spacing: 0; width: 100%;">
       <tr>
-        <th>名前</th>
-        <th>友好</th>
-        <th>不安</th>
-        <th>暗躍</th>
-        <th>死亡</th>
+        <th>Name</th>
+        <th>Goodwill</th>
+        <th>Paranoia</th>
+        <th>Intrigue</th>
+        <th>Death</th>
       </tr>
       <ng-container *ngFor="let card of rooperCards">
         <tr>

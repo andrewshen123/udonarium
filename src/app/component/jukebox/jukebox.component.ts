@@ -37,7 +37,7 @@ export class JukeboxComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.modalService.title = this.panelService.title = 'ジュークボックス'
+    this.modalService.title = this.panelService.title = 'Jukebox'
     this.auditionPlayer.volumeType = VolumeType.AUDITION;
     EventSystem.register(this)
       .on('*', event => {
